@@ -1,37 +1,37 @@
 import { useState, useEffect } from 'react';
 
-const Formulario = ({ pacientes, setPacientes }) => {
+const Form = ({ patients, setPatients }) => {
 
-    const [nombre, setNombre] = useState('');
-    const [propietario, setPropietario] = useState('');
+    const [name, setName] = useState('');
+    const [owner, setOwner] = useState('');
     const [email, setEmail] = useState('');
-    const [fecha, setFecha] = useState('');
-    const [sintomas, setSintomas] = useState('');
+    const [date, setDate] = useState('');
+    const [symptoms, setSymptoms] = useState('');
     const [error, setError] = useState(false)
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        if([nombre, propietario, email, fecha, sintomas].includes('')){
+        if([name, owner, email, date, symptoms].includes('')){
             setError(true)
             return;
         }
         setError(false)
-        const objectoPaciente = {
-            nombre,
-            propietario,
+        const objectPatient = {
+            name,
+            owner,
             email,
-            fecha,
-            sintomas
+            date,
+            symptoms
         }
-        setPacientes([...pacientes, objectoPaciente])
+        setPatients([...patients, objectPatient])
 
-        // Reiniciar el form
-        setNombre('');
-        setPropietario('')
+        // Restart el form
+        setName('');
+        setOwner('')
         setEmail('')
-        setFecha('')
-        setSintomas('')
+        setDate('')
+        setSymptoms('')
     }
 
     return (
@@ -40,7 +40,7 @@ const Formulario = ({ pacientes, setPacientes }) => {
                 Seguimiento de pacientes
             </h2>
             <p className="mt-5 text-center text-lg mb-5">
-                Aniade pacientes {' '}
+                Agregar pacientes {' '}
                 <span className="font-bold text-indigo-600">
                     Administralos
                 </span>
@@ -59,29 +59,29 @@ const Formulario = ({ pacientes, setPacientes }) => {
                 <div className="mb-5">
                     <label
                         className="block text-gray-700 uppercase font-bold"
-                        htmlFor="mascota"
+                        htmlFor="pet"
                     >Nombre Mascota</label>
                     <input
-                        id="mascota"
+                        id="pet"
                         type="text"
                         placeholder="Nombre de la mascota"
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                        value={nombre}
-                        onChange={ (e) => setNombre(e.target.value) }
+                        value={name}
+                        onChange={ (e) => setName(e.target.value) }
                     />
                 </div>
                 <div className="mb-5">
                     <label
                         className="block text-gray-700 uppercase font-bold"
-                        htmlFor="propietario"
+                        htmlFor="owner"
                     >Nombre Propietario</label>
                     <input
-                        id="propietario"
+                        id="owner"
                         type="text"
                         placeholder="Nombre de la propietario"
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                        value={propietario}
-                        onChange={ (e) => setPropietario(e.target.value) }
+                        value={owner}
+                        onChange={ (e) => setOwner(e.target.value) }
                     />
                 </div>
                 <div className="mb-5">
@@ -107,21 +107,21 @@ const Formulario = ({ pacientes, setPacientes }) => {
                         id="alta"
                         type="date"
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                        value={fecha}
-                        onChange={ (e) => setFecha(e.target.value) }
+                        value={date}
+                        onChange={ (e) => setDate(e.target.value) }
                     />
                 </div>
                 <div className="mb-5">
                     <label
                         className="block text-gray-700 uppercase font-bold"
-                        htmlFor="sintomas"
+                        htmlFor="symptoms"
                     >Sintomas</label>
                     <textarea
-                        id="sintomas"
+                        id="symptoms"
                         className="border-w w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         placeholder="Describe los sintomas"
-                        value={sintomas}
-                        onChange={ (e) => setSintomas(e.target.value) }
+                        value={symptoms}
+                        onChange={ (e) => setSymptoms(e.target.value) }
                     />
                 </div>
                 <input
@@ -134,4 +134,4 @@ const Formulario = ({ pacientes, setPacientes }) => {
     )
 }
 
-export default Formulario;
+export default Form;

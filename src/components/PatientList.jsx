@@ -1,6 +1,6 @@
-import Paciente from "./Paciente";
+import Patient from "./Patient";
 
-const ListadoPacientes = () => {
+const PatientList = () => {
   return (
     <div className="md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll">
         <h2 className="font-black text-3xl text-center">
@@ -11,12 +11,12 @@ const ListadoPacientes = () => {
             <span className="text-indigo-600 font-bold">Pacientes y Citas</span>
         </p>
 
-        <Paciente />
-        <Paciente />
-        <Paciente />
-        <Paciente />
+        <Patient />
+        <Patient />
+        <Patient />
+        <Patient />
     </div>
   )
 }
 
-export default ListadoPacientes;
+export default PatientList;
