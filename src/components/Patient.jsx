@@ -3,8 +3,8 @@ const Patient = ({ patient, setPatient, deletePatient }) => {
     const { name, date, owner, symptoms, id } = patient;
 
     const handleDelete = () => {
-        const answer = confirm('Deseas eliminar este paciente')
-        if(answer) deletePatient(id)
+        const answer = confirm('Deseas eliminar este paciente');
+        if(answer) deletePatient(id);
     } 
 
     return (
