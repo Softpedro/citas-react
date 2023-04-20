@@ -1,44 +1,65 @@
 import { useState, useEffect } from 'react';
 import Error from './Error';
-const Form = ({ patients, setPatients }) => {
+
+
+const Form = ({ patients, setPatients, patient, setPatient }) => {
 
     const [name, setName] = useState('');
     const [owner, setOwner] = useState('');
     const [email, setEmail] = useState('');
     const [date, setDate] = useState('');
     const [symptoms, setSymptoms] = useState('');
-    const [error, setError] = useState(false)
+    const [error, setError] = useState(false);
+
+    useEffect(() =>{
+        if( Object.keys(patient).length > 0 ){
+            setName(patient.name);
+            setOwner(patient.owner);
+            setEmail(patient.email);
+            setDate(patient.date);
+            setSymptoms(patient.symptoms);
+        }
+    }, [patient]);
 
     const generateId = () => {
         const random = Math.random().toString(36).slice(4);
-        const fecha = Date.now().toString(36)
-        return random + fecha
+        const fecha = Date.now().toString(36);
+        return random + fecha;
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
         if([name, owner, email, date, symptoms].includes('')){
-            setError(true)
+            setError(true);
             return;
         }
-        setError(false)
+        setError(false);
         const objectPatient = {
             name,
             owner,
             email,
             date,
             symptoms,
-            id: generateId()
         }
-        setPatients([...patients, objectPatient])
+
+        if(patient.id) {
+            objectPatient.id = patient.id;
+            const updatedPatient = patients.map( patientState => patientState.id === patient.id ? objectPatient : patientState);
+            setPatients(updatedPatient);
+            setPatient({});
+        }
+        if(!patient.id) {
+            objectPatient.id = generateId();
+            setPatients([...patients, objectPatient]);
+        }
 
         // Restart el form
         setName('');
-        setOwner('')
-        setEmail('')
-        setDate('')
-        setSymptoms('')
+        setOwner('');
+        setEmail('');
+        setDate('');
+        setSymptoms('');
     }
 
     return (
@@ -128,6 +149,7 @@ const Form = ({ patients, setPatients }) => {
                 <input
                     type="submit"
                     className="transition-all w-full bg-indigo-600 font-bold p-3 cursor-pointer uppercase text-white hover:bg-indigo-700"
+                    value={ patient.id ? 'Editar paciente' : 'Agregar Paciente' }
                 />
 
             </form>

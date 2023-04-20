@@ -4,8 +4,13 @@ import Header from "./components/Header"
 import PatientList from "./components/PatientList"
 
 function App() {
-  const [patients, setPatients] = useState([])
+  const [patients, setPatients] = useState([]);
+  const [patient, setPatient] = useState({});
 
+  const deletePatient = (id) => {
+    const updatedPatient = patients.filter( patient =>  patient.id !== id)
+    setPatients(updatedPatient)
+  }
   return (
     <div className="container mx-auto mt-20">
       <Header />
@@ -13,9 +18,13 @@ function App() {
         <Form
           patients={patients}
           setPatients={setPatients}
+          patient={patient}
+          setPatient={setPatient}
         />
         <PatientList
           patients={patients}
+          setPatient={setPatient}
+          deletePatient={deletePatient}
         />
       </div>
     </div>
